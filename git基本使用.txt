@@ -1,0 +1,29 @@
+1.配置用户名和密码
+	git config --global user.name "yuyunbo1"
+	git config --global user.email "18774833892@163.com"
+2.建立git仓库
+	git init
+3.添加需要上传到github的代码到本地仓库
+	git add 
+4.commit到仓库
+	git commit -m "第一次提交"
+5.去github网站上创建自己的Repository
+6.将本地的仓库关联到github上
+	git remote add origin git@github com:leiphp/awesome-python3-webapp.git
+7.传代码到github远程仓库
+	git push -u origin master
+	会提示输入用户名密码等
+8.最后
+	git pull --rebase origin master
+
+
+使用：
+1：添加修改
+	git add *
+2.提交本地
+	git commit -m "提交注释"
+3.提交
+	git push origin master     origin表示远端主机，master是本地分支名
+4.拉取代码
+	git pull origin master     originorigin表示远端主机，master是远端分支名
+	
