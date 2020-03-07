@@ -1,3 +1,4 @@
+一：从本地建仓
 1.配置用户名和密码
 	git config --global user.name "yuyunbo1"
 	git config --global user.email "18774833892@163.com"
@@ -17,7 +18,7 @@
 	git pull --rebase origin master
 
 
-使用：
+二：git基本使用：
 1：添加修改
 	git add *
 2.提交本地
@@ -26,4 +27,8 @@
 	git push origin master     origin表示远端主机，master是本地分支名
 4.拉取代码
 	git pull origin master     originorigin表示远端主机，master是远端分支名
-	
+
+三：避免每次提交代码输入密码
+	在.git文件夹下执行命令：git config  credential.helper store                        
+	这里没有--global意思是指只对这个仓库生效，建议以后都不要加--global
+	让代码配置以仓库为单位存储就好，设置成全局不灵活
