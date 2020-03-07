@@ -32,3 +32,8 @@
 	在.git文件夹下执行命令：git config  credential.helper store                        
 	这里没有--global意思是指只对这个仓库生效，建议以后都不要加--global
 	让代码配置以仓库为单位存储就好，设置成全局不灵活
+
+四：关闭开机自启动项
+	wim+R
+	msconfig
+	点击启动页，勾选即可
