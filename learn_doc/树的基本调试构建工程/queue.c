@@ -36,6 +36,14 @@ TREENODE_T* QueuePop(QUEUE_T* queue)
     queue->size--;
     return node;
 }
+TREENODE_T* QueueGetHead(QUEUE_T* queue)
+{
+    TREENODE_T* node = NULL;
+    if (QueueIsEmpty(queue) == 1) {
+        return NULL;
+    }
+    return queue->nodePool[queue->head];
+}
 int QueueSize(QUEUE_T* queue)
 {
     return queue->size;

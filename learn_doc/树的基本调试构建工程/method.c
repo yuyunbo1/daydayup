@@ -63,13 +63,15 @@ void PostOrderDfs(TREENODE_T* root)
     PostOrderDfs(root->right);
     printf("%d ", root->val);
 }
-/**6.树的层次遍历*/
+
+/**6.树的层次遍历,空结点补1需要修改*/
 int* LevelTraverse(TREENODE_T* root, int* returnSize)
 {
     int* res = NULL;
     int res_count = 0;
     int i, levelSize;
     TREENODE_T* headNode = NULL;
+    TREENODE_T* tmpNode = NULL;
     QUEUE_T queue = {0};
     QueueReInit(&queue);
     QueuePush(&queue, root);
@@ -115,5 +117,26 @@ struct TreeNode* BuildOneBstTreeByPreorder(int* preOrder, int preLeft, int preRi
     root->right = BuildOneBstTreeByPreorder(preOrder, index, preRight);
     return root;
 }
+/**8.求树的深度*/
 
-
+int DfsMaxDepthDownUp(struct TreeNode* root)
+{
+    int depthLeft;
+    int depthRight;
+    int max = 0;
+    if (root == NULL) {
+        return 0;
+    }
+    depthLeft = DfsMaxDepthDownUp(root->left);
+    depthRight = DfsMaxDepthDownUp(root->right);
+    //max = GET_MAX(depthLeft, depthRight);
+    //return max + 1;
+    return GET_MAX(depthLeft + 1, depthRight + 1);
+}
+int maxDepth(struct TreeNode* root)
+{
+    if (root == NULL) {
+        return 0;
+    }
+    return DfsMaxDepthDownUp(root);
+}
