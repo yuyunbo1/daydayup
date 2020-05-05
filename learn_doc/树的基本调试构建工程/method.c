@@ -64,6 +64,7 @@ void PostOrderDfs(TREENODE_T* root)
     printf("%d ", root->val);
 }
 
+
 /**6.树的层次遍历,空结点补1需要修改*/
 int* LevelTraverse(TREENODE_T* root, int* returnSize)
 {
@@ -118,7 +119,6 @@ struct TreeNode* BuildOneBstTreeByPreorder(int* preOrder, int preLeft, int preRi
     return root;
 }
 /**8.求树的深度*/
-
 int DfsMaxDepthDownUp(struct TreeNode* root)
 {
     int depthLeft;
@@ -129,8 +129,6 @@ int DfsMaxDepthDownUp(struct TreeNode* root)
     }
     depthLeft = DfsMaxDepthDownUp(root->left);
     depthRight = DfsMaxDepthDownUp(root->right);
-    //max = GET_MAX(depthLeft, depthRight);
-    //return max + 1;
     return GET_MAX(depthLeft + 1, depthRight + 1);
 }
 int maxDepth(struct TreeNode* root)
@@ -140,3 +138,41 @@ int maxDepth(struct TreeNode* root)
     }
     return DfsMaxDepthDownUp(root);
 }
+/**求树的深度end*/
+
+/**9.递归层次遍历,按层打印，将空节点补齐-1*/
+void LevelTraverseDfs(TREENODE_T* root, int** res, int maxLevel, int curLevel, int* resColSize)
+{
+    if (root == NULL) {
+        if (curLevel >= maxLevel) {
+            return;
+        } else {
+            res[curLevel][resColSize[curLevel]++] = -1;
+            LevelTraverseDfs(NULL, res, maxLevel, curLevel + 1, resColSize);
+            LevelTraverseDfs(NULL, res, maxLevel, curLevel + 1, resColSize);
+            return;
+        }
+    }
+    res[curLevel][resColSize[curLevel]++] = root->val;
+    LevelTraverseDfs(root->left, res, maxLevel, curLevel + 1, resColSize);
+    LevelTraverseDfs(root->right, res, maxLevel, curLevel + 1, resColSize);
+
+}
+#define MAX_NODE_NUM 100
+int** LevelTraverseDfsDirve(TREENODE_T* root, int* returnSize, int **returnColumnSizes)
+{   int i = 0;
+    int** res = (int**)calloc(MAX_NODE_NUM, sizeof(int*));
+    int* resColSize =(int*)calloc(MAX_NODE_NUM, sizeof(int));
+    int maxLevel = 0;
+    for (i = 0; i < MAX_NODE_NUM; i++) {
+        res[i] = (int*)calloc(MAX_NODE_NUM, sizeof(int));
+    }
+    /** 先求出最大深度*/
+    maxLevel = DfsMaxDepthDownUp(root);
+    *returnSize = maxLevel;
+
+    LevelTraverseDfs(root, res, maxLevel, 0, resColSize);
+    *returnColumnSizes = resColSize;
+    return res;
+}
+/**递归层次遍历end*/

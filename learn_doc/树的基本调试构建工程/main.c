@@ -25,8 +25,11 @@ void test1()
     int vecSize = sizeof(vecLevelTraversal) / sizeof(vecLevelTraversal[0]);
     TREENODE_T* tree = NULL;
     int *res = NULL;
+    int** resDfs = NULL;
+    int* resDfsColSize = (int*)calloc(1, sizeof(int));
+    int resDfsReturnSize = 0;
     int resSize;
-    int i;
+    int i, j;
     /**从完全二叉树的顺序结构中恢复二叉树*/
     tree = CreateBinaryTreeFromLevelTraverseVec(vecLevelTraversal, 0, vecSize);
     /**先序遍历生成的树*/
@@ -37,12 +40,22 @@ void test1()
     printf("\n");
     /**后序遍历*/
     PostOrderDfs(tree);
-    /**层次遍历*/
+    /**层次遍历 queue,目前有缺，可以达到调试eetcode的标准，但不满足自己的要求*/
     res = LevelTraverse(tree, &resSize);
     printf("\n");
     for (i = 0; i < resSize; i++) {
         printf("%d ", res[i]);
     }
+    printf("\n");
+    /**层次遍历 dfs*/
+    resDfs = LevelTraverseDfsDirve(tree, &resDfsReturnSize, &resDfsColSize);
+    for (i = 0; i < resDfsReturnSize; i++) {
+        for (j = 0; j < resDfsColSize[i]; j++) {
+            printf("%d ", resDfs[i][j]);
+        }
+        printf("\n");
+    }
+
     /**销毁树之后继续遍历是不行的*/
     DestroyBinaryTree(&tree);
     PreOrderDfs(tree);
@@ -57,32 +70,18 @@ void test2()
     int *res = NULL;
     int resSize;
     int i;
+    printf("\ntest2 start\n");
     tree = BuildOneBstTreeByPreorder(preVecFromBst, 0, preVecFromBstSize);
     res = LevelTraverse(tree, &resSize);
     for (i = 0; i < resSize; i++) {
         printf("%d ", res[i]);
     }
-}
-void test3()
-{
-    int treeVec[] = {3,9,20,-1,-1,15,7};
-    int treeVecSize = sizeof(treeVec) / sizeof(treeVec[0]);
-    TREENODE_T* tree = NULL;
-    int *res = NULL;
-    int resSize;
-    int i;
-    tree = CreateBinaryTreeFromLevelTraverseVec(treeVec, 0, treeVecSize);
-    res = LevelTraverse(tree, &resSize);
-    printf("\ntest3\n");
-    for (i = 0; i < resSize; i++) {
-        printf("%d ", res[i]);
-    }
+    printf("\ntest2 end\n");
 }
 int main()
 {
     test1();
-    //test2();
-    //test3();
+    test2();
     return 0;
 }
 
