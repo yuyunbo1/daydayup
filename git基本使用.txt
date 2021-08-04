@@ -18,7 +18,7 @@
 	git pull --rebase origin master
 
 
-二：git基本使用：
+二：git基本使用
 1：添加修改
 	git add *
 2.提交本地
@@ -33,7 +33,26 @@
 	这里没有--global意思是指只对这个仓库生效，建议以后都不要加--global
 	让代码配置以仓库为单位存储就好，设置成全局不灵活
 
-四：关闭开机自启动项
+四：本地分支运用
+1.创建本地分支并切换到该分支
+	git checkout -b branch_name 
+2.本地分支合并
+	例如将B分支合并到A
+	git checkout A 切换到A分支
+	git merge A B
+3.合并或解决冲突可能使用stash
+	git stash
+	git stash list
+	git stash pop stash@{index} 将第几个stash弹出(恢复)
+	git stash drop stash@{index} 删除第几个stash的内容
+4.git branch
+	列出所有本地分支
+	-d branch_name 删除某分支
+	-D branch_name 强制删除某分支
+	
+
+
+五：关闭开机自启动项
 	wim+R
 	msconfig
 	点击启动页，勾选即可
